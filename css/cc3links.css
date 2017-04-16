@@ -1,0 +1,17 @@
+.local-title {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.tab-content {
+  padding-top: 20px;
+}
+
+.fake-link {
+  color: #337ab7;
+  cursor: pointer;
+}
+
+.fake-link:hover {
+  text-decoration: underline;
+}

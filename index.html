@@ -1,0 +1,204 @@
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Liens CC3</title>
+
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/cc3links.css" rel="stylesheet">
+    
+    <script src="js/angular.min.js"></script>
+    <script src="js/cc3links.js"></script>
+  </head>
+  <body ng-app="app">
+    <nav class="navbar navbar-default navboar-fixed-top" ng-controller="menuController">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">CC3 Links</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Local <span class="sr-only">(current)</span></a></li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TASS <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a ng-href="{{urls.tass.simple}}" target="_blank">Simple</a></li>
+                <li><a ng-href="{{urls.tass.double}}" target="_blank">Double</a></li>
+              </ul>
+            </li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TFO <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a ng-href="{{urls.tfo.simple}}" target="_blank">Simple</a></li>
+                <li><a ng-href="{{urls.tfo.double}}" target="_blank">Double</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TPB <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a ng-href="{{urls.tpb.simple}}" target="_blank">Simple</a></li>
+                <li><a ng-href="{{urls.tpb.double}}" target="_blank">Double</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">B9_ <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IMOE</a>
+                  <ul class="dropdown-submenu">
+                    <li><a ng-href="{{urls.b9_.imoe.simple}}" target="_blank">Simple</a></li>
+                    <li><a ng-href="{{urls.b9_.imoe.double}}" target="_blank">Double</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RMOA</a>
+                  <ul class="dropdown-submenu">
+                    <li><a ng-href="{{urls.b9_.rmoa.simple}}" target="_blank">Simple</a></li>
+                    <li><a ng-href="{{urls.b9_.rmoa.double}}" target="_blank">Double</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="jumbotron" ng-controller="ventePanierController">
+            <h3 class="local-title">VentePanier</h3>
+            <form class="form-horizontal" id="vente-form" role="form" ng-submit="valider()">
+              <div class="form-group">
+                <label for="vente-idClient" class="col-sm-4 control-label">Id Client</label>
+                <div class="col-sm-8 col-md-4">
+                  <input type="text" id="vente-idClient" name="vente-idClient" class="form-control idClient" placeholder="Id Client" maxlength="9"
+                  pattern="^\d*$" required ng-model="form.idClient" ng-model-options="{updateOn : 'change blur'}" id-client/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="vente-bureauRdv" class="col-sm-4 control-label">Bureau rdv</label>
+                <div class="col-sm-8 col-md-4">
+                  <input type="text" id="vente-bureauRdv" name="vente-bureauRdv" class="form-control" placeholder="Bureau rdv" maxlength="6"
+                  pattern="^\d{6}$" required ng-model="form.bureauRdv"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary center-block" type="submit">Go !</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="jumbotron">
+            <h3 class="local-title">AQ</h3>
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#compte">Compte</a></li>
+              <li><a data-toggle="tab" href="#carte">Carte</a></li>
+              <li><a data-toggle="tab" href="#recap">Recap</a></li>
+            </ul>
+
+            <div class="tab-content">
+              <div id="compte" class="tab-pane fade in active" ng-controller="compteController">
+                <form class="form-horizontal" id="compte-form" role="form" ng-submit="valider()">
+                  <div class="form-group" ng-repeat="client in form.idClients track by $index">
+                    <label for="compte-idClient" class="col-sm-4 control-label">Id Client</label>
+                    <div class="col-sm-8 col-md-4">
+                      <div class="input-group">
+                        <input type="text" ng-id="compte-idClient" name="compte-idClient" class="form-control" placeholder="Id Client" maxlength="9"
+                        required id-client ng-model="form.idClients[$index]" ng-model-options="{updateOn : 'change blur'}"/>
+                        <span class="input-group-addon" ng-click="supprimerClient($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <span class="col-sm-4"></span>
+                    <span class="col-sm-8 col-md-4 control-label fake-link" ng-click="ajouterClient()">Ajouter Client</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="compte-idProposition" class="col-sm-4 control-label">Id proposition</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="compte-idProposition" name="compte-idProposition" class="form-control" placeholder="Id Proposition" maxlength="9"
+                      pattern="^\d{9}$" required ng-model="form.idProposition"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="compte-situationMetier" class="col-sm-4 control-label">Situation Metier</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="compte-situationMetier" name="compte-situationMetier" class="form-control" placeholder="Situation Metier" maxlength="9"
+                      required ng-model="form.situationMetier"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="compte-bureauRdv" class="col-sm-4 control-label">Bureau rdv</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="compte-bureauRdv" name="compte-bureauRdv" class="form-control" placeholder="Bureau rdv" maxlength="6"
+                      pattern="^\d{6}$" required ng-model="form.bureauRdv"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary center-block" type="submit">Go !</button>
+                  </div>
+                </form>
+              </div>
+              <div id="carte" class="tab-pane fade" ng-controller="carteController">
+                <form class="form-horizontal" id="compte-form" role="form" ng-submit="valider()">
+                  <div class="form-group">
+                    <label for="carte-idClient" class="col-sm-4 control-label">Id Client</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="carte-idClient" name="carte-idClient" class="form-control idClient" placeholder="Id Client" maxlength="9"
+                      pattern="^\d*$" required ng-model="form.idClient" ng-model-options="{updateOn : 'change blur'}" id-client/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="carte-idProposition" class="col-sm-4 control-label">Id proposition</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="carte-idProposition" name="carte-idProposition" class="form-control" placeholder="Id Proposition" maxlength="9"
+                      pattern="^\d{9}$" required ng-model="form.idProposition"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="carte-situationMetier" class="col-sm-4 control-label">Situation Metier</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="carte-situationMetier" name="carte-situationMetier" class="form-control" placeholder="Situation Metier" maxlength="9"
+                      required ng-model="form.situationMetier"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="carte-bureauRdv" class="col-sm-4 control-label">Bureau rdv</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="carte-bureauRdv" name="carte-bureauRdv" class="form-control" placeholder="Bureau rdv" maxlength="6"
+                      pattern="^\d{6}$" required ng-model="form.bureauRdv"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary center-block" type="submit">Go !</button>
+                  </div>
+                </form>
+              </div>
+              <div id="recap" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
