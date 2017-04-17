@@ -111,7 +111,7 @@
             </ul>
 
             <div class="tab-content">
-              <div id="compte" class="tab-pane fade in active" ng-controller="compteController">
+              <div id="compte" class="tab-pane slide in active" ng-controller="compteController">
                 <form class="form-horizontal" id="compte-form" role="form" ng-submit="valider()">
                   <div class="form-group" ng-repeat="client in form.idClients track by $index">
                     <label for="compte-idClient" class="col-sm-4 control-label">Id Client</label>
@@ -119,7 +119,7 @@
                       <div class="input-group">
                         <input type="text" ng-id="compte-idClient" name="compte-idClient" class="form-control" placeholder="Id Client" maxlength="9"
                         required id-client ng-model="form.idClients[$index]" ng-model-options="{updateOn : 'change blur'}"/>
-                        <span class="input-group-addon" ng-click="supprimerClient($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+                        <span class="input-group-addon pointer" ng-click="supprimerClient($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
                       </div>
                     </div>
                   </div>
@@ -153,8 +153,8 @@
                   </div>
                 </form>
               </div>
-              <div id="carte" class="tab-pane fade" ng-controller="carteController">
-                <form class="form-horizontal" id="compte-form" role="form" ng-submit="valider()">
+              <div id="carte" class="tab-pane slide in" ng-controller="carteController">
+                <form class="form-horizontal" id="carte-form" role="form" ng-submit="valider()">
                   <div class="form-group">
                     <label for="carte-idClient" class="col-sm-4 control-label">Id Client</label>
                     <div class="col-sm-8 col-md-4">
@@ -188,9 +188,61 @@
                   </div>
                 </form>
               </div>
-              <div id="recap" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Some content in menu 2.</p>
+              <div id="recap" class="tab-pane slide in" ng-controller="recapController">
+                <form class="form-horizontal" id="recap-form" role="form" ng-submit="valider()">
+                  <div class="form-group" ng-repeat="client in form.idClients track by $index">
+                    <label for="recap-idClient" class="col-sm-4 control-label">Id Client</label>
+                    <div class="col-sm-8 col-md-4">
+                      <div class="input-group">
+                        <input type="text" ng-id="recap-idClient" name="recap-idClient" class="form-control" placeholder="Id Client" maxlength="9"
+                        required id-client ng-model="form.idClients[$index]" ng-model-options="{updateOn : 'change blur'}"/>
+                        <span class="input-group-addon pointer" ng-click="supprimerClient($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <span class="col-sm-4"></span>
+                    <span class="col-sm-8 col-md-4 control-label fake-link" ng-click="ajouterClient()">Ajouter Client</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="recap-idPropositionCompte" class="col-sm-4 control-label">Id proposition Compte</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="recap-idPropositionCompte" name="recap-idPropositionCompte" class="form-control" placeholder="Id Proposition Compte" maxlength="9"
+                      pattern="^\d{9}$" ng-model="form.idPropositionCompte"/>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-repeat="carte in form.idPropositionsCarte track by $index">
+                    <label for="recap-idPropositionCarte" class="col-sm-4 control-label">Id proposition Carte</label>
+                    <div class="col-sm-8 col-md-4">
+                      <div class="input-group">
+                        <input type="text" ng-id="recap-idPropositionCarte" name="recap-idPropositionCarte" class="form-control" placeholder="Id Proposition Carte" maxlength="9"
+                        ng-model="form.idPropositionsCarte[$index]" ng-model-options="{updateOn : 'change blur'}"/>
+                        <span class="input-group-addon pointer" ng-click="supprimerCarte($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <span class="col-sm-4"></span>
+                    <span class="col-sm-8 col-md-4 control-label fake-link" ng-click="ajouterCarte()">Ajouter Carte</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="recap-situationMetier" class="col-sm-4 control-label">Situation Metier</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="recap-situationMetier" name="recap-situationMetier" class="form-control" placeholder="Situation Metier" maxlength="9"
+                      required ng-model="form.situationMetier"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="recap-bureauRdv" class="col-sm-4 control-label">Bureau rdv</label>
+                    <div class="col-sm-8 col-md-4">
+                      <input type="text" id="recap-bureauRdv" name="recap-bureauRdv" class="form-control" placeholder="Bureau rdv" maxlength="6"
+                      pattern="^\d{6}$" required ng-model="form.bureauRdv"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary center-block" type="submit">Go !</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

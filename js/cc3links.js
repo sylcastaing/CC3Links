@@ -47,10 +47,19 @@ app.service('champsService', function() {
 
 app.service('urlsService', function() {
 
+  /**
+   * Ouverture d'une nouvelle page
+   */
   this.open = function(url, params) {
     window.open(formatterUrl(url, params));
   };
 
+  /**
+   * Transformation de l'url avec les paths Variables
+   * 
+   * @param {*} url 
+   * @param {*} params 
+   */
   var formatterUrl = function(url, params) {
     var retour = url;
     var value = null;
@@ -70,24 +79,48 @@ app.service('urlsService', function() {
     return retour;
   };
 
+  /**
+   * Ajout des queries à l'URL
+   * 
+   * @param {*} url 
+   * @param {*} params 
+   */
   var addQueries = function(url, params) {
     var retour = url;
+
+    // Récupération des queries
     var startQueries = url.indexOf('{?');
     var endQueries = url.indexOf('}');
 
     if (startQueries > 0 && endQueries > 0) {
+
+      // Transformation des queries en tableau
       var queries = retour.substring(startQueries + 2, endQueries).split(',');
-      retour.substring(0, startQueries);
+
+      // Suppression des queries dans l'url
+      retour = retour.substring(0, startQueries);
 
       var value = null;
       var indice = 0;
+
+      // Parcours des queries
       for (var i in queries) {
+
+        // Récupération de la value
         value = params[queries[i]];
+
+        // Transformation en chaine
+        if (Array.isArray(value)) {
+          value = value.join(',');
+        }
+
+        // Ajout des queries à l'url
         if (value) {
           if (indice > 0) {
             retour += '&';
           }
           retour += queries[i] + '=' + value;
+          indice++;
         }
       }
     }
@@ -124,9 +157,7 @@ app.controller('compteController', function($scope, urls, champsService, urlsSer
   };
 
   $scope.ajouterClient = function() {
-    console.log($scope.form.idClients);
     $scope.form.idClients.push('');
-    console.log($scope.form.idClients);
   };
 
   $scope.supprimerClient = function(index) {
@@ -156,6 +187,42 @@ app.controller('carteController', function($scope, urls, champsService, urlsServ
 
     urlsService.open(urls.local.carte, $scope.form);
   };
+});
+
+app.controller('recapController', function($scope, urls, champsService, urlsService) {
+
+  $scope.form = {
+    idClients: [''],
+    idPropositionCompte: '',
+    idPropositionsCarte: [''],
+    situationMetier: 'VENTE',
+    bureauRdv: '385530'
+  };
+
+  $scope.ajouterClient = function() {
+    $scope.form.idClients.push('');
+  };
+
+  $scope.supprimerClient = function(index) {
+    $scope.form.idClients.splice(index, 1);
+  };
+
+  $scope.ajouterCarte = function() {
+    $scope.form.idPropositionsCarte.push('');
+  };
+
+  $scope.supprimerCarte = function(index) {
+    $scope.form.idPropositionsCarte.splice(index, 1);
+  };
+
+  $scope.valider = function() {
+    for (var i in $scope.form.idClients) {
+      $scope.form.idClients[i] = champsService.formatterIdClient($scope.form.idClients[i]);
+      
+    }
+    urlsService.open(urls.local.recap, $scope.form);
+  };
+
 });
 
 app.directive('idClient', function(champsService) {
