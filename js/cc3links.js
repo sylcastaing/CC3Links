@@ -2,7 +2,7 @@ var app = angular.module('app', []);
 
 app.constant('urls', {
   local: {
-    vente: 'http://localhost:7003/routing/vente/entree/{idClient}?lbpRtgProxy=/routing/proxy&bureauRdv/{bureauRdv}',
+    vente: 'http://localhost:7003/routing/vente/entree/{idClient}?lbpRtgProxy=/routing/proxy&bureauRdv={bureauRdv}',
     compte: 'http://localhost:7005/personnalisationCompte/index.html#/clients/{idClients}/proposition/{idProposition}/situationMetier/{situationMetier}/bureauRdv/{bureauRdv}',
     carte: 'http://localhost:7005/personnalisationCarte/index.html#/client/{idClient}/proposition/{idProposition}/situationMetier/{situationMetier}/bureauRdv/{bureauRdv}',
     recap: 'http://localhost:7005/propositionContrat/index.html#/clients/{idClients}/situationMetier/{situationMetier}/bureauRdv/{bureauRdv}/{?idPropositionCompte,idPropositionsCarte}'
