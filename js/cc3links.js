@@ -2,31 +2,27 @@ var app = angular.module('app', []);
 
 app.constant('urls', {
   local: {
-    vente: 'http://localhost:7003/ventePanier/{idClient}/bureauRdv/{bureauRdv}',
-    compte: 'http://localhost:7005/personnalisationCompte/{idClients}/proposition/{idProposition}/situationMetier/{situationMetier}/bureauRdv/{bureauRdv}',
-    carte: 'http://localhost:7005/personnalisationCarte/{idClient}/proposition/{idProposition}/situationMetier/{situationMetier}/bureauRdv/{bureauRdv}',
-    recap: 'http://localhost:7005/propositionContrat/{idClients}/situationMetier/{situationMetier}/bureauRdv/{bureauRdv}/{?idPropositionCompte,idPropositionsCarte}'
+    vente: 'http://localhost:7003/routing/vente/entree/{idClient}?lbpRtgProxy=/routing/proxy&bureauRdv/{bureauRdv}',
+    compte: 'http://localhost:7005/personnalisationCompte/index.html#/clients/{idClients}/proposition/{idProposition}/situationMetier/{situationMetier}/bureauRdv/{bureauRdv}',
+    carte: 'http://localhost:7005/personnalisationCarte/index.html#/client/{idClient}/proposition/{idProposition}/situationMetier/{situationMetier}/bureauRdv/{bureauRdv}',
+    recap: 'http://localhost:7005/propositionContrat/index.html#/clients/{idClients}/situationMetier/{situationMetier}/bureauRdv/{bureauRdv}/{?idPropositionCompte,idPropositionsCarte}'
   },
   tass: {
-    simple: 'http://google.fr/test',
-    double: 'http://google.fr'
+    simple: 'https://imoe-stmcv1.sf.intra.laposte.fr:444/ws_wk5/api/proxy/shortcut/h51/Accueil',
+    double: 'https://imoe-stmcv1.sf.intra.laposte.fr/ws_wk5/api/proxy/shortcut/h51/Accueil'
   },
   tfo: {
-    simple: 'http://google.fr/test',
-    double: 'http://google.fr'
-  },
-  tpb: {
-    simple: 'http://google.fr/test',
-    double: 'http://google.fr'
+    simple: 'https://rmoa-stmcv1.sf.intra.laposte.fr:444/ws_wk5/api/proxy/shortcut/h51/Accueil',
+    double: 'https://rmoa-stmcv1.sf.intra.laposte.fr/ws_wk5/api/proxy/shortcut/h51/Accueil'
   },
   b9_: {
     imoe: {
-      simple: 'http://google.fr/test',
-      double: 'http://google.fr'
+      simple: 'https://imoe-stmcv1.sf.intra.laposte.fr:444/ws_b9_p/npc/monportail/init',
+      double: 'https://imoe-stmcv1.sf.intra.laposte.fr/ws_b9_p/npc/monportail/init'
     },
     rmoa: {
-      simple: 'http://google.fr/test',
-      double: 'http://google.fr'
+      simple: 'https://rmoa-stmcv1.sf.intra.laposte.fr:444/ws_b9_/npc/monportail/init',
+      double: 'https://rmoa-stmcv1.sf.intra.laposte.fr/ws_b9_/npc/monportail/init'
     }
   }
 });
