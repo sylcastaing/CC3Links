@@ -36,11 +36,16 @@ app.service('champsService', function() {
   this.formatterIdClient = function(id) {
     if (id !== undefined && id !== null && id !== '' && new RegExp(/^\d*$/).test(id)) {
       var nb = 9 - id.length;
+      var newId = "";
 
-      id = "0".repeat(nb) + id;
+      for (var i = 0; i < nb; i++) {
+        newId += 0;
+      }
+
+      newId += id;
     }
 
-    return id;
+    return newId;
   };
 
 });
